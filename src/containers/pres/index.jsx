@@ -4,10 +4,8 @@ import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles(theme => ({
   fab: {
-    margin: theme.spacing(1)
-  },
-  extendedIcon: {
-    marginRight: theme.spacing(1)
+    margin: theme.spacing(1),
+    marginLeft: "13%"
   }
 }));
 
@@ -18,7 +16,7 @@ const Pres = () => {
     document.body.style.backgroundSize = "73%";
   }, []);
 
-  const [miEstado, setMiEstado] = useState("ssssdo");
+  const [miEstado, setMiEstado] = useState("MINI-JUEGOS");
 
   const classes = useStyles();
   console.log(miEstado);
@@ -28,10 +26,18 @@ const Pres = () => {
       <Fab
         variant="extended"
         aria-label="delete"
-        onClick={() => setMiEstado("sdsdsssss")}
+        onClick={() => setMiEstado("PASAR")}
         className={classes.fab}
       >
-        Extended
+        Extendedd
+      </Fab>
+      <Fab
+        variant="extended"
+        aria-label="delete"
+        onClick={() => setMiEstado("PASAR")}
+        className={classes.fab}
+      >
+        Salir...
       </Fab>
     </Fragment>
   );

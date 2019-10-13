@@ -12,7 +12,9 @@ import { Link } from "react-router-dom";
 const useStyles = makeStyles(theme => ({
   fab: {
     margin: theme.spacing(1),
-    marginLeft: "13%"
+    marginLeft: "5%",
+    width: "30%",
+    heigth: "30%"
   }
 }));
 
@@ -41,9 +43,11 @@ const Pres = () => {
       </ThemeProvider>
 
       <ThemeProvider theme={theme}>
-        <Fab variant="extended" aria-label="delete" className={classes.fab}>
-          <Link to="/home">JUGAR...</Link>
-        </Fab>
+        <Link to="/home">
+          <Fab variant="extended" aria-label="delete" className={classes.fab}>
+            JUGAR...
+          </Fab>
+        </Link>
         <Fab
           variant="extended"
           aria-label="delete"

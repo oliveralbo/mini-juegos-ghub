@@ -1,21 +1,16 @@
 import React from "react";
-import { Pres } from "./containers";
-import Container from "@material-ui/core/Container";
-import { makeStyles } from "@material-ui/styles";
-
-const useStyles = makeStyles({
-  cont: {
-    marginTop: "15%"
-  }
-});
+import Layout from "./components/layouts";
+import { Pres, Home } from "./containers";
+import { BrowserRouter, Route, Link } from "react-router-dom";
 
 function App() {
-  const classes = useStyles();
-
   return (
-    <Container maxWidth="xs" className={classes.cont}>
-      <Pres />
-    </Container>
+    <Layout>
+      <BrowserRouter>
+        <Route exact path="/" component={Pres} />
+        <Route exact path="/home" component={Home} />
+      </BrowserRouter>
+    </Layout>
   );
 }
 

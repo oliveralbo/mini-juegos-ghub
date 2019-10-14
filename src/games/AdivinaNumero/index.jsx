@@ -29,7 +29,7 @@ function AdivinaNumero() {
   const [sysNumber, setSysNumber] = useState(Math.floor(Math.random() * 100));
   const [message, setMessage] = useState(null);
   const [trys, setTrys] = useState(0);
-  const [openModal, setOpenModal] = useState(null);
+  const [openModal, setOpenModal] = useState(false);
 
   const handleChange = event => {
     setUserNumber(parseInt(event.target.value));
@@ -45,18 +45,17 @@ function AdivinaNumero() {
         ? "el numero por adivinar es mayor."
         : `ganaste, acertaste en ${trys} intentos!!!`
     );
-    debugger;
     if (userNumber === sysNumber) {
-      debugger;
-      setUserNumber(null);
-      setSysNumber(Math.floor(Math.random() * 100));
-      setOpenModal(handleOpen = () => {
-        setOpen(true);
-      });
-      const handleOpen = () => {
-        setOpen(true);
-      };
+      setOpenModal(true);
     }
+  };
+
+  const closeModal = () => {
+    setOpenModal(false);
+    setUserNumber("");
+    setTrys(0);
+    setMessage(null);
+    setSysNumber(Math.floor(Math.random() * 100));
   };
 
   return (
@@ -103,7 +102,11 @@ function AdivinaNumero() {
         </Grid>
       </Grid>
 
-      <TransitionsModal handleOpen={openModal} />
+      <TransitionsModal
+        handleOpen={openModal}
+        handleClose={closeModal}
+        message={message}
+      />
     </Fragment>
   );
 }

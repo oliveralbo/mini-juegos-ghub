@@ -20,46 +20,25 @@ const useStyles = makeStyles(theme => ({
 
 export default function TransitionsModal(props) {
   const classes = useStyles();
-  const [open, setOpen] = useState(false);
-  // useEffect(() => {
-  //   debugger;
-  //   if (props.handleOpen) {
-  //     setOpen(true);
-  //   }
-  // }, []);
 
-  const handleOpen = () => {
-    setOpen(true).stopPropagation();
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  props.handleOpen && handleOpen();
   return (
     <div>
-      {/* <button type="button" onClick={handleOpen}>
-        react-transition-group
-      </button> */}
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
         className={classes.modal}
-        open={open}
-        onClose={handleClose}
+        open={props.handleOpen}
+        onClose={props.handleClose}
         closeAfterTransition
         BackdropComponent={Backdrop}
         BackdropProps={{
           timeout: 500
         }}
       >
-        <Fade in={open}>
+        <Fade in={props.handleOpen}>
           <div className={classes.paper}>
-            <h2 id="transition-modal-title">Transition modal</h2>
-            <p id="transition-modal-description">
-              react-transition-group animates me.
-            </p>
+            <h2 id="transition-modal-title">Ganaste !!</h2>
+            <p id="transition-modal-description">{props.message}</p>
           </div>
         </Fade>
       </Modal>

@@ -8,6 +8,7 @@ import {
 import Typography from "@material-ui/core/Typography";
 import { ThemeProvider } from "@material-ui/styles";
 import { Link } from "react-router-dom";
+import LayoutPres from "../../components/layouts/LayoutPres";
 
 const useStyles = makeStyles(theme => ({
   fab: {
@@ -37,7 +38,7 @@ const Pres = () => {
   const classes = useStyles();
 
   return (
-    <Fragment>
+    <LayoutPres>
       <ThemeProvider theme={theme}>
         <Typography variant="h1">{miEstado}</Typography>
       </ThemeProvider>
@@ -57,7 +58,7 @@ const Pres = () => {
           Salir..
         </Fab>
       </ThemeProvider>
-    </Fragment>
+    </LayoutPres>
   );
 };
 

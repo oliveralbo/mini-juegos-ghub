@@ -1,16 +1,17 @@
-import React from "react";
-import Layout from "./components/layouts";
+import React, { Fragment } from "react";
+import LayoutPres from "./components/layouts/LayoutPres";
 import { Pres, Home } from "./containers";
 import { BrowserRouter, Route, Link } from "react-router-dom";
 
 function App() {
   return (
-    <Layout>
+    <Fragment>
       <BrowserRouter>
         <Route exact path="/" component={Pres} />
+
         <Route exact path="/home" component={Home} />
       </BrowserRouter>
-    </Layout>
+    </Fragment>
   );
 }
 

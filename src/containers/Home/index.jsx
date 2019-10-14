@@ -17,6 +17,7 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import SportsEsportsIcon from "@material-ui/icons/SportsEsports";
 import AdivinaNumero from "../../games/AdivinaNumero";
+import LayoutGames from "../../components/layouts/LayoutGames";
 import Ahorcado from "../../games/Ahorcado";
 import { BrowserRouter, Route, Link } from "react-router-dom";
 
@@ -143,14 +144,15 @@ function Home(props) {
           </Drawer>
         </Hidden>
       </nav>
-      <main className={classes.content}>
-        <div className={classes.toolbar} />
+
+      <LayoutGames>
+        {/* <div className={classes.toolbar} /> */}
         {myGame === "AdivinaNumero" ? (
           <AdivinaNumero />
         ) : myGame === "Ahorcado" ? (
           <Ahorcado />
         ) : null}
-      </main>
+      </LayoutGames>
     </div>
   );
 }

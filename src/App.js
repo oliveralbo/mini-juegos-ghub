@@ -1,7 +1,6 @@
 import React, { Fragment } from "react";
-import LayoutPres from "./components/layouts/LayoutPres";
 import { Pres, Home } from "./containers";
-import { BrowserRouter, Route, Link } from "react-router-dom";
+import { BrowserRouter, Route } from "react-router-dom";
 
 function App() {
   return (

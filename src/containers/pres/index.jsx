@@ -1,4 +1,4 @@
-import React, { useEffect, useState, Fragment } from "react";
+import React, { useEffect, useState } from "react";
 import Fab from "@material-ui/core/Fab";
 import {
   createMuiTheme,
@@ -49,6 +49,7 @@ const Pres = () => {
             JUGAR...
           </Fab>
         </Link>
+        <a href="https://www.google.com.ar">
         <Fab
           variant="extended"
           aria-label="delete"
@@ -57,6 +58,7 @@ const Pres = () => {
         >
           Salir..
         </Fab>
+        </a>
       </ThemeProvider>
     </LayoutPres>
   );

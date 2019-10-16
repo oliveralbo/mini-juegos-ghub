@@ -19,7 +19,7 @@ import SportsEsportsIcon from "@material-ui/icons/SportsEsports";
 import AdivinaNumero from "../../games/AdivinaNumero";
 import LayoutGames from "../../components/layouts/LayoutGames";
 import Ahorcado from "../../games/Ahorcado";
-import { BrowserRouter, Route, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const drawerWidth = 240;
 

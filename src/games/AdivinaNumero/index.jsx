@@ -12,7 +12,7 @@ const instructionStyle = {
 };
 
 const subTitleStyle = {
-  marginTop: "20%"
+  marginTop: "10%"
 };
 
 const buttonStyle = {
@@ -42,8 +42,8 @@ function AdivinaNumero() {
       userNumber > sysNumber
         ? "el numero por adivinar es menor."
         : userNumber < sysNumber
-          ? "el numero por adivinar es mayor."
-          : `ganaste, acertaste en ${trys} intentos!!!`
+        ? "el numero por adivinar es mayor."
+        : `ganaste, acertaste en ${trys} intentos!!!`
     );
     if (userNumber === sysNumber) {
       setOpenModal(true);
@@ -87,13 +87,9 @@ function AdivinaNumero() {
         </Grid>
 
         <Grid item sm={12}>
-          <Button
-            style={buttonStyle}
-            variant="contained"
-            onClick={handleClick}
-          >
+          <Button style={buttonStyle} variant="contained" onClick={handleClick}>
             Aceptar
-            </Button>
+          </Button>
         </Grid>
       </Grid>
 

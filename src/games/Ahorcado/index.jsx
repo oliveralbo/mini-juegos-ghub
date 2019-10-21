@@ -32,10 +32,6 @@ const subTitleStyle = {
   marginTop: "10%"
 };
 
-const buttonStyle = {
-  marginTop: "2%"
-};
-
 const fabStyle = {
   width: "8%",
   heigth: "15%",
@@ -58,6 +54,7 @@ function Ahorcado() {
         let myLetter = [];
         letter.map(x => {
           myLetter.push({ letter: x, status: "hidden" });
+          return false
         });
         setWord(myLetter);
       } catch (e) {
@@ -90,6 +87,7 @@ function Ahorcado() {
 
   const aceptLetter = () => {
     let myLetter = [];
+    let win = []
 
     word.map(x => {
       if (x.letter === oneLetter) {
@@ -101,7 +99,21 @@ function Ahorcado() {
           myLetter.push({ letter: x.letter, status: "hidden" });
         }
       }
-    });
+
+      if(x.status != "hidden" ){
+        win.push(1)
+      }
+
+      if(word.length === win.length + 1){
+        setOpenModal(true)
+     
+      }
+  
+    }
+    
+    
+    
+    );
     setWord(myLetter);
     closeSelectLetter();
   };
@@ -139,7 +151,7 @@ function Ahorcado() {
         </Grid>
 
         <Grid item sm={12}>
-          <Button style={buttonStyle} variant="contained" onClick={handleClick}>
+          <Button  variant="contained" onClick={handleClick}>
             Elegir letra
           </Button>
         </Grid>

@@ -146,12 +146,13 @@ function Home(props) {
       </nav>
 
       <LayoutGames>
-        {/* <div className={classes.toolbar} /> */}
-        {myGame === "AdivinaNumero" ? (
-          <AdivinaNumero />
-        ) : myGame === "Ahorcado" ? (
-          <Ahorcado />
-        ) : null}
+        <div className={classes.toolbar}>
+          {myGame === "AdivinaNumero" ? (
+            <AdivinaNumero />
+          ) : myGame === "Ahorcado" ? (
+            <Ahorcado />
+          ) : null}
+        </div>
       </LayoutGames>
     </div>
   );

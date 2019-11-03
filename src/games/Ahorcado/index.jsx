@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect } from "react";
+import React, { Fragment, useState, useEffect, useReducer } from "react";
 import Instructions from "../../components/Instructions";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
@@ -13,6 +13,8 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
+import services from "../../api/services";
+import img from "./imgs";
 
 const useStyles = makeStyles({
   card: {
@@ -24,7 +26,6 @@ const useStyles = makeStyles({
 });
 
 const instructionStyle = {
-  // marginLeft: "250%",
   float: "right"
 };
 
@@ -42,30 +43,32 @@ function Ahorcado() {
   const [word, setWord] = useState(null);
   const [openModal, setOpenModal] = useState(false);
   const [openSelectLetter, setOpenSelectLetter] = useState(false);
-  const [oneLetter, setOneLetter] = useState(null);
+  const [oneLetter, setOneLetter] = useState("");
+  const [deathLetter, setDeathLetter] = useState(null);
+  const [wrong, setWrong] = useState(1);
+  const [images, setImages] = useState(img.img1);
+  const classes = useStyles();
 
   useEffect(() => {
-    async function fetchData() {
-      try {
-        // const data = await services.getWords();
-        // let letter = data.data.word.split("");
-
-        let letter = "palabra".split("");
-        let myLetter = [];
-        letter.map(x => {
-          myLetter.push({ letter: x, status: "hidden" });
-          return false
-        });
-        setWord(myLetter);
-      } catch (e) {
-        console.log(e);
-      }
-    }
-
     fetchData();
   }, []);
 
-  const classes = useStyles();
+  async function fetchData() {
+    try {
+      // const data = await services.getWords();
+      // let letter = data.data.word.split("");
+      setDeathLetter("casa");
+      let letter = "casa".split("");
+      let myLetter = [];
+      letter.map(x => {
+        myLetter.push({ letter: x, status: "hidden" });
+        return false;
+      });
+      setWord(myLetter);
+    } catch (e) {
+      console.log(e);
+    }
+  }
 
   const handleChange = event => {
     setOneLetter(event.target.value);
@@ -82,12 +85,41 @@ function Ahorcado() {
 
   const closeModal = () => {
     setOpenModal(false);
-    //clean()
+    setWrong(1);
+    setImages(img.img1);
+    fetchData();
   };
 
-  const aceptLetter = () => {
+  const aceptLetter = async () => {
     let myLetter = [];
-    let win = []
+    let win = 0;
+
+    if (!deathLetter.includes(oneLetter)) {
+      setWrong(wrong + 1);
+
+      setImages(
+        wrong === 1
+          ? img.img2
+          : wrong === 2
+          ? img.img3
+          : wrong === 3
+          ? img.img4
+          : wrong === 4
+          ? img.img5
+          : wrong === 5
+          ? img.img6
+          : wrong === 6
+          ? img.img7
+          : wrong === 7
+          ? img.img8
+          : null
+      );
+    }
+
+    if (wrong === 7) {
+      lost();
+      return false;
+    }
 
     word.map(x => {
       if (x.letter === oneLetter) {
@@ -99,23 +131,26 @@ function Ahorcado() {
           myLetter.push({ letter: x.letter, status: "hidden" });
         }
       }
-
-      if(x.status != "hidden" ){
-        win.push(1)
+      if (myLetter[myLetter.length - 1].status != "hidden") {
+        win = win + 1;
       }
 
-      if(word.length === win.length + 1){
-        setOpenModal(true)
-     
-      }
-  
-    }
-    
-    
-    
-    );
+      word.length === win ? setOpenModal(true) : setOpenModal(false);
+    });
+
     setWord(myLetter);
     closeSelectLetter();
+  };
+
+  const handleKeyPress = event => {
+    if (event.key === "Enter") {
+      aceptLetter();
+    }
+  };
+
+  const lost = () => {
+    closeSelectLetter();
+    setOpenModal(true);
   };
 
   return (
@@ -144,14 +179,14 @@ function Ahorcado() {
           <Card className={classes.card}>
             <CardMedia
               className={classes.media}
-              image="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/3cb967b6-2823-4f74-8822-22291a6b48fe/ddifopa-e5e412ec-ebbf-4a99-bea2-13d51aa55ca2.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzNjYjk2N2I2LTI4MjMtNGY3NC04ODIyLTIyMjkxYTZiNDhmZVwvZGRpZm9wYS1lNWU0MTJlYy1lYmJmLTRhOTktYmVhMi0xM2Q1MWFhNTVjYTIucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.BXn0SW29u_7bqZzQrZywohDUxfVP_6H83oT4IKwCCZw"
+              image={images}
               title="Contemplative Reptile"
             />
           </Card>
         </Grid>
 
         <Grid item sm={12}>
-          <Button  variant="contained" onClick={handleClick}>
+          <Button variant="contained" onClick={handleClick}>
             Elegir letra
           </Button>
         </Grid>
@@ -162,16 +197,17 @@ function Ahorcado() {
         onClose={closeSelectLetter}
         aria-labelledby="form-dialog-title"
       >
-        <DialogTitle id="form-dialog-title">Subscribe</DialogTitle>
+        <DialogTitle id="form-dialog-title">Elija una letra</DialogTitle>
         <DialogContent>
-          <DialogContentText>Elija una letra.</DialogContentText>
           <TextField
+            autoFocus
             label="Letra"
             className={classes.textField}
             value={oneLetter}
             onChange={handleChange}
             margin="normal"
             inputProps={{ maxLength: 1 }}
+            onKeyPress={handleKeyPress}
           />
         </DialogContent>
         <DialogActions>

@@ -150,7 +150,7 @@ function Home(props) {
           {myGame === "AdivinaNumero" ? (
             <AdivinaNumero />
           ) : myGame === "Ahorcado" ? (
-            <Ahorcado />
+            <Ahorcado key={2} />
           ) : null}
         </div>
       </LayoutGames>

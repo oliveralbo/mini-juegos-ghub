@@ -25,7 +25,7 @@ const messageStyle = {
 };
 
 function AdivinaNumero() {
-  const [userNumber, setUserNumber] = useState(null);
+  const [userNumber, setUserNumber] = useState(0);
   const [sysNumber, setSysNumber] = useState(Math.floor(Math.random() * 100));
   const [message, setMessage] = useState(null);
   const [trys, setTrys] = useState(0);
@@ -50,6 +50,12 @@ function AdivinaNumero() {
     }
   };
 
+  const handleKeyPress = event => {
+    if (event.key === "Enter") {
+      handleClick();
+    }
+  };
+
   const closeModal = () => {
     setOpenModal(false);
     setUserNumber("");
@@ -69,6 +75,7 @@ function AdivinaNumero() {
 
         <Grid item xs={12} sm={8}>
           <TextField
+            autoFocus
             label="Ingrese número"
             value={userNumber}
             onChange={handleChange}
@@ -77,6 +84,7 @@ function AdivinaNumero() {
               shrink: true
             }}
             margin="normal"
+            onKeyPress={handleKeyPress}
           />
         </Grid>
         <Grid item xs={12} sm={4}>
@@ -87,9 +95,15 @@ function AdivinaNumero() {
         </Grid>
 
         <Grid item sm={12}>
-          <Button style={buttonStyle} variant="contained" onClick={handleClick}>
-            Aceptar
-          </Button>
+          <div>
+            <Button
+              style={buttonStyle}
+              variant="contained"
+              onClick={handleClick}
+            >
+              Aceptar
+            </Button>
+          </div>
         </Grid>
       </Grid>
 

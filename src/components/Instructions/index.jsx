@@ -32,10 +32,16 @@ function Instructions(props) {
           {"Instrucciones de mini-juego"}
         </DialogTitle>
         <DialogContent>
-          <DialogContentText id="alert-dialog-description">
-            Debés averiguar que número entre 1 y 100 eligio el sistema en la
-            menor cantidad de intentos posibles.
-          </DialogContentText>
+          {props.adivinaNumero ? (
+            <DialogContentText id="alert-dialog-description">
+              Debés averiguar que número entre 0 y 100 eligio el sistema en la
+              menor cantidad de intentos posibles.
+            </DialogContentText>
+          ) : props.ahorcado ? (
+            <DialogContentText id="alert-dialog-description">
+              Debés encontrar la palabra oculta antes de perder tu vida.
+            </DialogContentText>
+          ) : null}
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary" autoFocus>

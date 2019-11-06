@@ -20,6 +20,15 @@ const useStyles = makeStyles(theme => ({
 
 export default function TransitionsModal(props) {
   const classes = useStyles();
+  const [title, setTitle] = useState(null);
+
+  // if (props.message) {
+  //   if (props.message.includes("Ganaste")) {
+  //     setTitle("Ganaste !!!");
+  //   } else {
+  //     setTitle("Perdiste !!!");
+  //   }
+  // }
 
   return (
     <div>
@@ -37,7 +46,7 @@ export default function TransitionsModal(props) {
       >
         <Fade in={props.handleOpen}>
           <div className={classes.paper}>
-            <h2 id="transition-modal-title">Ganaste !!</h2>
+            {/* <h2 id="transition-modal-title">Gracias por participar.</h2> */}
             <p id="transition-modal-description">{props.message}</p>
           </div>
         </Fade>

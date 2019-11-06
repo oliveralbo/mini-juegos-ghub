@@ -68,7 +68,7 @@ function AdivinaNumero() {
     <Fragment>
       <Grid container spacing={1}>
         <Grid item xs={12}>
-          <Instructions style={instructionStyle} />
+          <Instructions style={instructionStyle} adivinaNumero />
 
           <h3 style={subTitleStyle}>Que número eligió el sistema ?</h3>
         </Grid>

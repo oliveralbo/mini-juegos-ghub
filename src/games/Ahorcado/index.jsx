@@ -45,11 +45,13 @@ function Ahorcado() {
   const [openSelectLetter, setOpenSelectLetter] = useState(false);
   const [oneLetter, setOneLetter] = useState("");
   const [deathLetter, setDeathLetter] = useState(null);
-  const [wrong, setWrong] = useState(1);
+  const [wrong, setWrong] = useState(0);
   const [images, setImages] = useState(img.img1);
+  const [message, setMessage] = useState(null);
   const classes = useStyles();
 
   useEffect(() => {
+    setWrong(wrong + 1);
     fetchData();
   }, []);
 
@@ -57,6 +59,7 @@ function Ahorcado() {
     try {
       // const data = await services.getWords();
       // let letter = data.data.word.split("");
+      // setDeathLetter(data.data.word);
       setDeathLetter("casa");
       let letter = "casa".split("");
       let myLetter = [];
@@ -84,6 +87,7 @@ function Ahorcado() {
   };
 
   const closeModal = () => {
+    setMessage(null);
     setOpenModal(false);
     setWrong(1);
     setImages(img.img1);
@@ -94,9 +98,27 @@ function Ahorcado() {
     let myLetter = [];
     let win = 0;
 
-    if (!deathLetter.includes(oneLetter)) {
-      setWrong(wrong + 1);
+    word.map(x => {
+      if (x.letter === oneLetter) {
+        myLetter.push({ letter: x.letter, status: "visible" });
+      } else {
+        if (x.status === "visible") {
+          myLetter.push({ letter: x.letter, status: "visible" });
+        } else {
+          myLetter.push({ letter: x.letter, status: "hidden" });
+        }
+      }
+      if (myLetter[myLetter.length - 1].status != "hidden") {
+        win = win + 1;
+      }
 
+      if (word.length === win) {
+        setMessage("Ganaste, lograste salvar tu vida");
+        setOpenModal(true);
+      }
+    });
+    debugger;
+    if (!deathLetter.includes(oneLetter)) {
       setImages(
         wrong === 1
           ? img.img2
@@ -114,29 +136,12 @@ function Ahorcado() {
           ? img.img8
           : null
       );
-    }
-
-    if (wrong === 7) {
-      lost();
-      return false;
-    }
-
-    word.map(x => {
-      if (x.letter === oneLetter) {
-        myLetter.push({ letter: x.letter, status: "visible" });
-      } else {
-        if (x.status === "visible") {
-          myLetter.push({ letter: x.letter, status: "visible" });
-        } else {
-          myLetter.push({ letter: x.letter, status: "hidden" });
-        }
+      setWrong(wrong + 1);
+      if (wrong === 7) {
+        lost();
+        return false;
       }
-      if (myLetter[myLetter.length - 1].status != "hidden") {
-        win = win + 1;
-      }
-
-      word.length === win ? setOpenModal(true) : setOpenModal(false);
-    });
+    }
 
     setWord(myLetter);
     closeSelectLetter();
@@ -149,6 +154,7 @@ function Ahorcado() {
   };
 
   const lost = () => {
+    setMessage("Perdiste, no adivinaste la palabra");
     closeSelectLetter();
     setOpenModal(true);
   };
@@ -157,7 +163,7 @@ function Ahorcado() {
     <Fragment>
       <Grid container spacing={10}>
         <Grid item xs={12}>
-          <Instructions style={instructionStyle} />
+          <Instructions style={instructionStyle} ahorcado />
 
           <h3 style={subTitleStyle}>Ahorcado</h3>
         </Grid>
@@ -223,7 +229,7 @@ function Ahorcado() {
       <TransitionsModal
         handleOpen={openModal}
         handleClose={closeModal}
-        message="sfsfsf"
+        message={message}
       />
     </Fragment>
   );

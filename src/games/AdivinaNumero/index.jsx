@@ -62,12 +62,16 @@ function AdivinaNumero() {
           } intentos!!!`
     );
 
-    setMessage2(
-      trysP1 > trysP2 ? "Gano el jugador 2 !!" : "Gano el jugador 1 !!"
-    );
+    if (trysP1 > trysP2) {
+      setMessage2("Gano el jugador 2 !!");
+    } else if (trysP1 < trysP2) {
+      setMessage2("Gano el jugador 1 !!");
+    } else if (trysP1 === trysP2) {
+      setMessage2("Fue un empate !!");
+    }
 
     if (userNumber === sysNumber) {
-      playerActive === "uno" ? setOpenModal(true) : setOpenModal2(true);
+      setOpenModal(true);
     }
   };
 
@@ -90,9 +94,9 @@ function AdivinaNumero() {
   const closeModal2P = () => {
     if (playerActive === "dos") {
       closeModal();
+      setOpenModal2(true);
     } else {
       setOpenModal(false);
-      setOpenModal2(true);
       setUserNumber("");
       setPlayerActive("dos");
       setMessage(null);

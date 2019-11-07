@@ -60,8 +60,8 @@ function Ahorcado() {
       // const data = await services.getWords();
       // let letter = data.data.word.split("");
       // setDeathLetter(data.data.word);
-      setDeathLetter("casa");
-      let letter = "casa".split("");
+      setDeathLetter("palabra");
+      let letter = "palabra".split("");
       let myLetter = [];
       letter.map(x => {
         myLetter.push({ letter: x, status: "hidden" });

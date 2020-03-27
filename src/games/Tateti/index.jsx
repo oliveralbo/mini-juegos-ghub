@@ -21,12 +21,8 @@ const subTitleStyle = {
 
 function TaTeTi() {
 
-    const [message, setMessage] = useState(null);
-    const [openModal, setOpenModal] = useState(false);
-    const [playerActive, setPlayerActive] = useState(1);
-    const [players, setPlayers] = useState("uno");
-    const [images, setImages] = useState(img);
-    const [data, setData] = useState([{
+
+    const INITIAL_STATE = [{
         grilla: 0,
         clickeado: false,
         player: 2
@@ -62,12 +58,15 @@ function TaTeTi() {
         grilla: 8,
         clickeado: false,
         player: 2
-    }])
+    }]
 
+    const [message, setMessage] = useState(null);
+    const [openModal, setOpenModal] = useState(false);
+    const [playerActive, setPlayerActive] = useState(1);
+    const [players, setPlayers] = useState("uno");
+    const [images, setImages] = useState(img);
+    const [data, setData] = useState(INITIAL_STATE)
 
-    // useEffect(() => {
-    //     setData(data)
-    // })
 
     const handleChangeOption = event => {
         setPlayers(event.target.value);
@@ -77,17 +76,49 @@ function TaTeTi() {
     const handleClick = (i) => {
         setData(data.map((x, index) => {
             if (index === i) {
-                return {
-                    ...x, clickeado: true, player: playerActive
+                if (x.clickeado === true) {
+                    return x
+                } else {
+                    setPlayerActive(playerActive === 1 ? 2 : 1);
+                    return {
+                        ...x, clickeado: true, player: playerActive
+                    }
                 }
             }
             return x
-        }))
-        setPlayerActive(playerActive === 1 ? 2 : 1);
+        })
+        )
     }
 
 
 
+    useEffect(() => {
+        let opcionesPosibles = [
+            [0, 1, 2],
+            [3, 4, 5],
+            [6, 7, 8],
+            [0, 3, 6],
+            [1, 4, 7],
+            [2, 5, 8],
+            [0, 4, 8],
+            [2, 4, 6],
+        ];
+
+        for (let i = 0; i < opcionesPosibles.length; i++) {
+            const [ta, te, ti] = opcionesPosibles[i];
+
+            if (data[ta].clickeado && data[te].clickeado && data[ti].clickeado) {
+                if (data[ta].player === 1 && data[te].player === 1 && data[ti].player === 1) {
+                    alert("gano el jugador 1")
+                    setData(INITIAL_STATE)
+                }
+                if (data[ta].player === 2 && data[te].player === 2 && data[ti].player === 2) {
+                    alert("gano el jugador 2")
+                    setData(INITIAL_STATE)
+                }
+            }
+        }
+    }, [data]);
 
 
     const closeModal = () => {
@@ -95,7 +126,7 @@ function TaTeTi() {
         setMessage(null);
 
     };
-    console.log(data)
+
 
     return (
         <Fragment>

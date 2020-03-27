@@ -31,14 +31,6 @@ export default function Grilla(props) {
     const { img, action, data } = props
     const classes = useStyles();
 
-
-    // const makeGrilla = () => {
-
-
-
-
-    // }
-    console.log(data)
     return (
         <div>
             <Grid container spacing={6}>
@@ -50,10 +42,10 @@ export default function Grilla(props) {
                         return (
 
                             <Paper onClick={() => action(i)} className={classes.paper} key={Math.random()}>
-                                <img src={x.grilla === i && x.clickeado && x.player === 2 ? img.cruz : x.grilla === i && x.clickeado && x.player === 1 ? img.circulo : null} className={classes.img} />
+                                <img src={x.grilla === i && x.clickeado && x.player === 2 ?
+                                    img.cruz : x.grilla === i && x.clickeado && x.player === 1 ?
+                                        img.circulo : null} className={classes.img} />
                             </Paper>
-
-
                         )
                     })}
                 </Grid>

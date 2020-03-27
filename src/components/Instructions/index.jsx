@@ -41,6 +41,10 @@ function Instructions(props) {
             <DialogContentText id="alert-dialog-description">
               Debés encontrar la palabra oculta antes de perder tu vida.
             </DialogContentText>
+          ) : props.tateti ? (
+            <DialogContentText id="alert-dialog-description">
+              Clasico juego de TaTeTi tres en linea.
+            </DialogContentText>
           ) : null}
         </DialogContent>
         <DialogActions>

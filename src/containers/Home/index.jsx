@@ -19,6 +19,7 @@ import SportsEsportsIcon from "@material-ui/icons/SportsEsports";
 import AdivinaNumero from "../../games/AdivinaNumero";
 import LayoutGames from "../../components/layouts/LayoutGames";
 import Ahorcado from "../../games/Ahorcado";
+import TaTeTi from "../../games/Tateti";
 import { Link } from "react-router-dom";
 
 const drawerWidth = 240;
@@ -151,6 +152,8 @@ function Home(props) {
             <AdivinaNumero />
           ) : myGame === "Ahorcado" ? (
             <Ahorcado key={2} />
+          ) : myGame === "TaTeTi" ? (
+            <TaTeTi key={2} />
           ) : null}
         </div>
       </LayoutGames>

@@ -17,10 +17,7 @@ const instructionStyle = {
 const subTitleStyle = {
     marginTop: "10%"
 };
-
-
 function TaTeTi() {
-
 
     const INITIAL_STATE = [{
         grilla: 0,
@@ -70,19 +67,60 @@ function TaTeTi() {
 
 
     const handleChangeOption = event => {
+        setData(INITIAL_STATE)
+        setEmpate(0)
         setPlayers(event.target.value);
         // closeModal();
     };
 
     const handleClick = (i) => {
 
+        if (players === "dos") {
+            setData(data.map((x, index) => {
+                if (index === i) {
+                    if (x.clickeado === true) {
+                        return x
+                    } else {
+                        setPlayerActive(playerActive === 1 ? 2 : 1);
+                        setEmpate(empate + 1)
+                        return {
+                            ...x, clickeado: true, player: playerActive
+                        }
+                    }
+                }
+                return x
+            })
+            )
+        } else {
+            if (playerActive === 1) {
+                setData(data.map((x, index) => {
+                    if (index === i) {
+                        if (x.clickeado === true) {
+                            return x
+                        } else {
+                            setPlayerActive(playerActive === 1 ? 2 : 1);
+                            setEmpate(empate + 1)
+                            return {
+                                ...x, clickeado: true, player: playerActive
+                            }
+                        }
+                    }
+                    return x
+                }))
+            }
+        }
+    }
+
+    const botPlay = () => {
+        let bot = Math.round(Math.random() * 9)
 
         setData(data.map((x, index) => {
-            if (index === i) {
+            if (index === bot) {
                 if (x.clickeado === true) {
                     return x
                 } else {
                     setPlayerActive(playerActive === 1 ? 2 : 1);
+                    setEmpate(empate + 1)
                     return {
                         ...x, clickeado: true, player: playerActive
                     }
@@ -91,7 +129,6 @@ function TaTeTi() {
             return x
         })
         )
-        setEmpate(empate + 1)
     }
 
 
@@ -131,18 +168,23 @@ function TaTeTi() {
             }
         }
         if (empate === 9 && !p1Win && !p2Win) {
-
             alert("empate")
             setTimeout(() => { setData(INITIAL_STATE) }, 1000)
             setEmpate(0)
-
         }
+        if (players === "uno" && playerActive === 2 && empate < 9) {
+            setTimeout(botPlay, 300)
+        }
+
     }, [data]);
+
+
 
 
     const closeModal = () => {
         setOpenModal(false);
         setMessage(null);
+        setPlayerActive(1);
 
     };
 

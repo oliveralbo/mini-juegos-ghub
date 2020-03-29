@@ -1,13 +1,17 @@
+
 import React from "react";
-
-
-const content = {
-  marginLeft: "1%",
-  marginTop: "7%"
-};
+import Grid from "@material-ui/core/Grid";
+import { Container } from "@material-ui/core";
+import Box from "@material-ui/core/Box";
 
 function LayoutGames(props) {
-  return <div style={content}>{props.children}</div>;
+  return (
+    <Box mt={10}>
+      <Container>
+        <Grid container>{props.children}</Grid>
+      </Container>
+    </Box>
+  );
 }
 
 export default LayoutGames;

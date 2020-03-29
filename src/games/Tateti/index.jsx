@@ -66,6 +66,7 @@ function TaTeTi() {
     const [players, setPlayers] = useState("uno");
     const [images, setImages] = useState(img);
     const [data, setData] = useState(INITIAL_STATE)
+    const [empate, setEmpate] = useState(0)
 
 
     const handleChangeOption = event => {
@@ -74,6 +75,8 @@ function TaTeTi() {
     };
 
     const handleClick = (i) => {
+
+
         setData(data.map((x, index) => {
             if (index === i) {
                 if (x.clickeado === true) {
@@ -88,6 +91,7 @@ function TaTeTi() {
             return x
         })
         )
+        setEmpate(empate + 1)
     }
 
 
@@ -108,15 +112,30 @@ function TaTeTi() {
             const [ta, te, ti] = opcionesPosibles[i];
 
             if (data[ta].clickeado && data[te].clickeado && data[ti].clickeado) {
-                if (data[ta].player === 1 && data[te].player === 1 && data[ti].player === 1) {
+                var p1Win = data[ta].player === 1 && data[te].player === 1 && data[ti].player === 1;
+                var p2Win = data[ta].player === 2 && data[te].player === 2 && data[ti].player === 2
+
+                if (p1Win) {
                     alert("gano el jugador 1")
-                    setData(INITIAL_STATE)
+                    setTimeout(() => { setData(INITIAL_STATE) }, 1000)
+                    setEmpate(0)
+                    break
                 }
-                if (data[ta].player === 2 && data[te].player === 2 && data[ti].player === 2) {
+                if (p2Win) {
                     alert("gano el jugador 2")
-                    setData(INITIAL_STATE)
+                    setTimeout(() => { setData(INITIAL_STATE) }, 1000)
+                    setEmpate(0)
+                    break
                 }
+
             }
+        }
+        if (empate === 9 && !p1Win && !p2Win) {
+
+            alert("empate")
+            setTimeout(() => { setData(INITIAL_STATE) }, 1000)
+            setEmpate(0)
+
         }
     }, [data]);
 
@@ -127,7 +146,7 @@ function TaTeTi() {
 
     };
 
-
+    console.log(empate)
     return (
         <Fragment>
             <Grid container spacing={1}>

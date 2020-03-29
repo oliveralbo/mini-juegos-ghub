@@ -7,6 +7,7 @@ import Radio from "@material-ui/core/Radio";
 import FormControl from "@material-ui/core/FormControl";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import img from "./imgs";
+import TransitionsModal from "../../components/Modal";
 
 
 const instructionStyle = {
@@ -70,6 +71,7 @@ function TaTeTi() {
         setData(INITIAL_STATE)
         setEmpate(0)
         setPlayers(event.target.value);
+        setPlayerActive(1);
         // closeModal();
     };
 
@@ -111,7 +113,11 @@ function TaTeTi() {
         }
     }
 
-    const botPlay = () => {
+    const botPlay = (opcionesPosibles) => {
+
+
+
+
         let bot = Math.round(Math.random() * 9)
 
         setData(data.map((x, index) => {
@@ -153,29 +159,25 @@ function TaTeTi() {
                 var p2Win = data[ta].player === 2 && data[te].player === 2 && data[ti].player === 2
 
                 if (p1Win) {
-                    alert("gano el jugador 1")
-                    setTimeout(() => { setData(INITIAL_STATE) }, 1000)
-                    setEmpate(0)
+                    setMessage("Gano el jugador 1 !!");
+                    setOpenModal(true);
                     break
                 }
                 if (p2Win) {
-                    alert("gano el jugador 2")
-                    setTimeout(() => { setData(INITIAL_STATE) }, 1000)
-                    setEmpate(0)
+                    setMessage("Gano el jugador 2 !!");
+                    setOpenModal(true);
                     break
                 }
-
             }
         }
         if (empate === 9 && !p1Win && !p2Win) {
-            alert("empate")
-            setTimeout(() => { setData(INITIAL_STATE) }, 1000)
-            setEmpate(0)
+            setMessage("empate");
+            setOpenModal(true);
         }
         if (players === "uno" && playerActive === 2 && empate < 9) {
-            setTimeout(botPlay, 300)
+            // setTimeout(botPlay(opcionesPosibles), 300)
+            botPlay(opcionesPosibles)
         }
-
     }, [data]);
 
 
@@ -185,10 +187,12 @@ function TaTeTi() {
         setOpenModal(false);
         setMessage(null);
         setPlayerActive(1);
+        setData(INITIAL_STATE)
+        setEmpate(0)
 
     };
 
-    console.log(empate)
+
     return (
         <Fragment>
             <Grid container spacing={1}>
@@ -228,11 +232,11 @@ function TaTeTi() {
             </Grid>
 
 
-            {/* <TransitionsModal
-                    handleOpen={openModal}
-
-                    message={message}
-                /> */}
+            <TransitionsModal
+                handleOpen={openModal}
+                handleClose={closeModal}
+                message={message}
+            />
 
         </Fragment>
     );

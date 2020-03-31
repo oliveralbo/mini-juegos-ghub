@@ -115,7 +115,7 @@ function TaTeTi() {
 
     const botPlay = (opcionesPosibles) => {
 
-
+        //ver IA con las pociones
 
 
         let bot = Math.round(Math.random() * 9)

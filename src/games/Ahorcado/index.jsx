@@ -15,6 +15,7 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import services from "../../api/services";
 import img from "./imgs";
+import palabras from "./palabras"
 
 const useStyles = makeStyles({
   card: {
@@ -56,12 +57,18 @@ function Ahorcado() {
   }, []);
 
   async function fetchData() {
+
+
+    let aleatorio = Math.floor(Math.random() * (palabras.length));
+    let seleccion = palabras[aleatorio]
+
+
     try {
       // const data = await services.getWords();
       // let letter = data.data.word.split("");
       // setDeathLetter(data.data.word);
-      setDeathLetter("palabra");
-      let letter = "palabra".split("");
+      setDeathLetter(seleccion);
+      let letter = seleccion.split("");
       let myLetter = [];
       letter.map(x => {
         myLetter.push({ letter: x, status: "hidden" });
@@ -123,18 +130,18 @@ function Ahorcado() {
         wrong === 1
           ? img.img2
           : wrong === 2
-          ? img.img3
-          : wrong === 3
-          ? img.img4
-          : wrong === 4
-          ? img.img5
-          : wrong === 5
-          ? img.img6
-          : wrong === 6
-          ? img.img7
-          : wrong === 7
-          ? img.img8
-          : null
+            ? img.img3
+            : wrong === 3
+              ? img.img4
+              : wrong === 4
+                ? img.img5
+                : wrong === 5
+                  ? img.img6
+                  : wrong === 6
+                    ? img.img7
+                    : wrong === 7
+                      ? img.img8
+                      : null
       );
       setWrong(wrong + 1);
       if (wrong === 7) {
@@ -171,14 +178,14 @@ function Ahorcado() {
         <Grid item xs={12} sm={8}>
           {word
             ? word.map(letter => {
-                return (
-                  <Fab color="primary" aria-label="add" style={fabStyle}>
-                    <span style={{ visibility: letter.status }}>
-                      {letter.letter}
-                    </span>
-                  </Fab>
-                );
-              })
+              return (
+                <Fab color="primary" aria-label="add" style={fabStyle}>
+                  <span style={{ visibility: letter.status }}>
+                    {letter.letter}
+                  </span>
+                </Fab>
+              );
+            })
             : null}
         </Grid>
         <Grid item xs={12} sm={4}>

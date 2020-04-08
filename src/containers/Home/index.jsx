@@ -21,6 +21,7 @@ import LayoutGames from "../../components/layouts/LayoutGames";
 import Ahorcado from "../../games/Ahorcado";
 import TaTeTi from "../../games/Tateti";
 import { Link } from "react-router-dom";
+import { useMediaQuery } from '../../lib/utils/useMediaHooks'
 
 const drawerWidth = 240;
 
@@ -56,7 +57,16 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
+const smallEmpty = {
+  width: "60%"
+}
+const smallMsj = {
+  float: "right"
+}
+
 function Home(props) {
+  const small = useMediaQuery('(max-width: 600px)')
+  const senala = "https://media.istockphoto.com/vectors/cartoon-of-businessman-holding-arrow-sign-pointing-left-and-up-vector-id926829336"
   const { container } = props;
   const classes = useStyles();
   const theme = useTheme();
@@ -68,11 +78,21 @@ function Home(props) {
   };
 
 
-  const pepe = (text) => {
+  const closeMobile = (text) => {
     setMyGame(text)
     setMobileOpen(false)
   }
 
+  const empty = () => {
+    return (small ?
+      <>
+        <img style={smallEmpty} src={senala} />
+        <h3 style={smallMsj}>click ahi !</h3>
+      </>
+      :
+      <h3 >Elegi una opcion</h3>
+    )
+  }
 
 
   const drawer = (
@@ -81,7 +101,7 @@ function Home(props) {
       <Divider />
       <List>
         {["AdivinaNumero", "TaTeTi", "Ahorcado"].map((text, index) => (
-          <ListItem button onClick={() => { pepe(text) }} key={text}>
+          <ListItem button onClick={() => { closeMobile(text) }} key={text}>
             <ListItemIcon>
               <SportsEsportsIcon />
             </ListItemIcon>
@@ -162,7 +182,7 @@ function Home(props) {
             <Ahorcado key={2} />
           ) : myGame === "TaTeTi" ? (
             <TaTeTi key={2} />
-          ) : null}
+          ) : empty()}
         </div>
       </LayoutGames>
     </div>

@@ -38,7 +38,9 @@ const smallBloque = {
 const smallPaper = {
     height: "30%"
 }
-
+const smallImg = {
+    width: "115%",
+}
 
 
 
@@ -57,7 +59,7 @@ export default function Grilla(props) {
                         return (
                             <Paper onClick={() => action(i)} style={small ? smallPaper : null} className={classes.paper} key={Math.random()}>
                                 {x.grilla === i && x.clickeado && x.player === 2 ?
-                                    <img src={img.cruz} className={classes.img} /> : x.grilla === i && x.clickeado && x.player === 1 ?
+                                    <img src={img.cruz} className={classes.img} style={small ? smallImg : null} /> : x.grilla === i && x.clickeado && x.player === 1 ?
                                         <img src={img.circulo} className={classes.img2} /> : null}
                             </Paper>
                         )

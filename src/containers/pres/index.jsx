@@ -13,13 +13,16 @@ const useStyles = makeStyles(theme => ({
     marginLeft: "5%",
     width: "30%",
     heigth: "30%",
+
+    textAlign: "center",
   },
   h1: {
     marginLeft: "275px",
     marginTop: "15%"
   },
   fabes: {
-    marginLeft: "16%",
+    textAlign: "center",
+    marginTop: "15%",
   }
 }));
 
@@ -31,6 +34,7 @@ const smallBtn = {
   heigth: "30%",
 }
 const smallTitle = {
+  textAlign: "center",
   marginLeft: "5%",
   marginTop: "200px",
   color: "white"
@@ -67,10 +71,10 @@ const Pres = () => {
 
   return (
     <LayoutPres>
-      <Grid className={classes.h1} style={small ? smallTitle : null}>
+      {/* <Grid className={classes.h1} style={small ? smallTitle : null}> */}
+      <Grid item xs={12} className={classes.fabes} style={small ? smallTitle : null}>
         <Typography variant={small ? "h4" : 'h1'} >{title}</Typography>
-      </Grid>
-      <Grid item xs={12} className={classes.fabes} >
+        {/* </Grid> */}
         <Link to='/home'>
           <Fab variant='extended' aria-label='delete' style={small ? smallBtn : null} className={classes.fab}>
             JUGAR...

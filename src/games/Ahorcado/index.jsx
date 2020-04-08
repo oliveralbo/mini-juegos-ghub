@@ -171,7 +171,7 @@ function Ahorcado() {
     closeSelectLetter();
     setOpenModal(true);
   };
-  console.log(small)
+
   return (
     <Fragment>
       <Grid container spacing={10}>

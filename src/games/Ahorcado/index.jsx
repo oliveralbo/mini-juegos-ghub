@@ -33,7 +33,7 @@ const styles = {
     heigth: "15%",
     fontWeight: "bold"
   }, card: small => ({
-    maxWidth: small ? "92%" : "150%"
+    maxWidth: small ? "55%" : "150%"
   }),
   media: small => ({
     height: small ? 175 : 190,

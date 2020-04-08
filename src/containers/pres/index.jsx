@@ -25,21 +25,26 @@ const useStyles = makeStyles(theme => ({
 
 const smallBtn = {
   marginTop: "8%",
+  marginLeft: "0",
   float: "left",
   width: "100%",
   heigth: "30%",
 }
 const smallTitle = {
-  marginLeft: "0",
+  marginLeft: "5%",
   marginTop: "200px",
-  fontZise: "80%"
+  color: "white"
+
 }
 
 const Pres = () => {
 
+  const fondoCelu = "https://i.pinimg.com/originals/1f/3b/29/1f3b296902dd948d7702ead940172c88.jpg"
+  const fondoDesktop = "http://www.solofondosdepantalla.net/fondos-de-pantalla/Juegos/Fondo-de-pantalla-Retro-console.jpg"
+  const small = useMediaQuery('(max-width: 600px)')
+
   useEffect(() => {
-    document.body.style.backgroundImage =
-      "url(http://www.solofondosdepantalla.net/fondos-de-pantalla/Juegos/Fondo-de-pantalla-Retro-console.jpg)";
+    document.body.style.backgroundImage = small ? `url(${fondoCelu})` : `url(${fondoDesktop})`;
     document.body.style.backgroundAttachment = "fixed";
     document.body.style.backgroundPosition = "center center";
     document.body.style.backgroundRepeat = " no-repeat";
@@ -49,10 +54,9 @@ const Pres = () => {
     return () => {
       document.body.style.backgroundImage = "none";
     };
-  }, []);
+  }, [small]);
 
 
-  const small = useMediaQuery('(max-width: 600px)')
 
 
 
@@ -63,8 +67,8 @@ const Pres = () => {
 
   return (
     <LayoutPres>
-      <Grid className={classes.h1} >
-        <Typography variant={small ? "h4" : 'h1'} style={small ? smallTitle : null}>{title}</Typography>
+      <Grid className={classes.h1} style={small ? smallTitle : null}>
+        <Typography variant={small ? "h4" : 'h1'} >{title}</Typography>
       </Grid>
       <Grid item xs={12} className={classes.fabes} >
         <Link to='/home'>

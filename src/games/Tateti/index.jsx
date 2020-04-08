@@ -62,7 +62,6 @@ function TaTeTi() {
     const [openModal, setOpenModal] = useState(false);
     const [playerActive, setPlayerActive] = useState(1);
     const [players, setPlayers] = useState("uno");
-    const [images, setImages] = useState(img);
     const [data, setData] = useState(INITIAL_STATE)
     const [empate, setEmpate] = useState(0)
 
@@ -113,10 +112,7 @@ function TaTeTi() {
         }
     }
 
-    const botPlay = (opcionesPosibles) => {
-
-        //ver IA con las pociones
-
+    const botPlay = () => {
 
         let bot = Math.round(Math.random() * 9)
 
@@ -178,7 +174,7 @@ function TaTeTi() {
             // setTimeout(botPlay(opcionesPosibles), 300)
             botPlay(opcionesPosibles)
         }
-    }, [data]);
+    }, [data, botPlay]);
 
 
 
@@ -224,7 +220,7 @@ function TaTeTi() {
 
 
 
-                <Grilla img={images} action={handleClick} data={data} />
+                <Grilla img={img} action={handleClick} data={data} />
 
 
 

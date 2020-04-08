@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect, useReducer } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import Instructions from "../../components/Instructions";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
@@ -11,34 +11,38 @@ import { makeStyles } from "@material-ui/core/styles";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
-import services from "../../api/services";
 import img from "./imgs";
 import palabras from "./palabras"
+import { useMediaQuery } from '../../lib/utils/useMediaHooks'
+// import services from "../../api/services";
 
-const useStyles = makeStyles({
-  card: {
-    maxWidth: "150%"
+
+
+
+const styles = {
+
+  instructionStyle: {
+    float: "right"
   },
-  media: {
-    height: 190
-  }
-});
+  subTitleStyle: {
+    marginTop: "10%"
+  },
+  fabStyle: {
+    width: "8%",
+    heigth: "15%",
+    fontWeight: "bold"
+  }, card: small => ({
+    maxWidth: small ? "92%" : "150%"
+  }),
+  media: small => ({
+    height: small ? 175 : 190,
+    with: small ? "92%" : ""
+  })
+}
 
-const instructionStyle = {
-  float: "right"
-};
 
-const subTitleStyle = {
-  marginTop: "10%"
-};
 
-const fabStyle = {
-  width: "8%",
-  heigth: "15%",
-  fontWeight: "bold"
-};
 
 function Ahorcado() {
   const [word, setWord] = useState(null);
@@ -49,7 +53,9 @@ function Ahorcado() {
   const [wrong, setWrong] = useState(0);
   const [images, setImages] = useState(img.img1);
   const [message, setMessage] = useState(null);
-  const classes = useStyles();
+  // const classes = useStyles();
+
+  const small = useMediaQuery('(max-width: 600px)')
 
   useEffect(() => {
     setWrong(wrong + 1);
@@ -81,7 +87,7 @@ function Ahorcado() {
   }
 
   const handleChange = event => {
-    setOneLetter(event.target.value);
+    setOneLetter(event.target.value.toUpperCase());
   };
 
   const handleClick = () => {
@@ -106,7 +112,7 @@ function Ahorcado() {
     let win = 0;
 
     word.map(x => {
-      if (x.letter === oneLetter) {
+      if (x.letter === oneLetter.toLowerCase()) {
         myLetter.push({ letter: x.letter, status: "visible" });
       } else {
         if (x.status === "visible") {
@@ -115,7 +121,7 @@ function Ahorcado() {
           myLetter.push({ letter: x.letter, status: "hidden" });
         }
       }
-      if (myLetter[myLetter.length - 1].status != "hidden") {
+      if (myLetter[myLetter.length - 1].status !== "hidden") {
         win = win + 1;
       }
 
@@ -124,8 +130,8 @@ function Ahorcado() {
         setOpenModal(true);
       }
     });
-    debugger;
-    if (!deathLetter.includes(oneLetter)) {
+
+    if (!deathLetter.includes(oneLetter.toLowerCase())) {
       setImages(
         wrong === 1
           ? img.img2
@@ -170,16 +176,16 @@ function Ahorcado() {
     <Fragment>
       <Grid container spacing={10}>
         <Grid item xs={12}>
-          <Instructions style={instructionStyle} ahorcado />
+          <Instructions style={styles.instructionStyle} ahorcado />
 
-          <h3 style={subTitleStyle}>Ahorcado</h3>
+          <h3 style={styles.subTitleStyle}>Ahorcado</h3>
         </Grid>
 
         <Grid item xs={12} sm={8}>
           {word
             ? word.map(letter => {
               return (
-                <Fab color="primary" aria-label="add" style={fabStyle}>
+                <Fab color="primary" aria-label="add" style={styles.fabStyle}>
                   <span style={{ visibility: letter.status }}>
                     {letter.letter}
                   </span>
@@ -189,9 +195,9 @@ function Ahorcado() {
             : null}
         </Grid>
         <Grid item xs={12} sm={4}>
-          <Card className={classes.card}>
+          <Card style={styles.card(small)}>
             <CardMedia
-              className={classes.media}
+              style={styles.media(small)}
               image={images}
               title="Contemplative Reptile"
             />
@@ -215,7 +221,7 @@ function Ahorcado() {
           <TextField
             autoFocus
             label="Letra"
-            className={classes.textField}
+            style={styles.textField}
             value={oneLetter}
             onChange={handleChange}
             margin="normal"

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Fab from "@material-ui/core/Fab";
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
@@ -36,14 +36,14 @@ const Pres = () => {
     };
   }, []);
 
-  const [miEstado, setMiEstado] = useState("MINI-JUEGOS");
+  const title = "MINI-JUEGOS"
 
   const classes = useStyles();
 
   return (
     <LayoutPres>
       <Grid item xl={12} className={classes.h1}>
-        <Typography variant='h1'>{miEstado}</Typography>
+        <Typography variant='h1'>{title}</Typography>
       </Grid>
       <Grid item xs={12} className={classes.fabes} >
         <Link to='/home'>

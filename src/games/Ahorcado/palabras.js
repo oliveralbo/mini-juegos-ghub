@@ -11,9 +11,9 @@ const palabras = [
   "leon",
   "guitarra",
   "evaluacion",
-  "Higiene",
-  "Progresivo",
-  "Terapia",
+  "higiene",
+  "progresivo",
+  "terapia",
   "virus"
 ];
  

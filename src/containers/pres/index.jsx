@@ -45,9 +45,9 @@ const Pres = () => {
 
   useEffect(() => {
     document.body.style.backgroundImage = small ? `url(${fondoCelu})` : `url(${fondoDesktop})`;
-    document.body.style.backgroundAttachment = "fixed";
-    document.body.style.backgroundPosition = "center center";
-    document.body.style.backgroundRepeat = " no-repeat";
+    document.body.style.backgroundAttachment = small ? "" : "fixed";
+    document.body.style.backgroundPosition = small ? "" : "center center";
+    document.body.style.backgroundRepeat = small ? "" : "no-repeat";
     document.body.style.backgroundSize = "cover";
     // background-attachment: fixed;
 

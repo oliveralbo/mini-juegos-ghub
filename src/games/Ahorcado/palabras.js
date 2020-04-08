@@ -16,7 +16,8 @@ const palabras = [
   "terapia",
   "virus",
   "guitarra",
-  "argentina"
+  "argentina",
+  "archipielago"
 ];
  
 

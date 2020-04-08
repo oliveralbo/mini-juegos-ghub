@@ -67,13 +67,21 @@ function Home(props) {
     setMobileOpen(!mobileOpen);
   };
 
+
+  const pepe = (text) => {
+    setMyGame(text)
+    setMobileOpen(false)
+  }
+
+
+
   const drawer = (
     <div>
       <div className={classes.toolbar} />
       <Divider />
       <List>
         {["AdivinaNumero", "TaTeTi", "Ahorcado"].map((text, index) => (
-          <ListItem button onClick={() => setMyGame(text)} key={text}>
+          <ListItem button onClick={() => { pepe(text) }} key={text}>
             <ListItemIcon>
               <SportsEsportsIcon />
             </ListItemIcon>

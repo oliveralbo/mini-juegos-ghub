@@ -37,7 +37,7 @@ const styles = {
   }),
   media: small => ({
     height: small ? 175 : 190,
-    with: small ? "92%" : ""
+    with: small ? "92%" : "40%"
   })
 }
 
@@ -171,7 +171,7 @@ function Ahorcado() {
     closeSelectLetter();
     setOpenModal(true);
   };
-
+  console.log(small)
   return (
     <Fragment>
       <Grid container spacing={10}>

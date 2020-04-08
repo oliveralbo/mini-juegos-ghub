@@ -5,8 +5,10 @@ import Typography from "@material-ui/core/Typography";
 import { Link } from "react-router-dom";
 import LayoutPres from "../../components/layouts/LayoutPres";
 import Grid from "@material-ui/core/Grid"
+import { useMediaQuery } from '../../lib/utils/useMediaHooks'
 
 const useStyles = makeStyles(theme => ({
+
   fab: {
     marginLeft: "5%",
     width: "30%",
@@ -14,14 +16,27 @@ const useStyles = makeStyles(theme => ({
   },
   h1: {
     marginLeft: "275px",
-    marginTop: "200px"
+    marginTop: "15%"
   },
   fabes: {
     marginLeft: "16%",
   }
 }));
 
+const smallBtn = {
+  marginTop: "8%",
+  float: "left",
+  width: "100%",
+  heigth: "30%",
+}
+const smallTitle = {
+  marginLeft: "0",
+  marginTop: "200px",
+  fontZise: "80%"
+}
+
 const Pres = () => {
+
   useEffect(() => {
     document.body.style.backgroundImage =
       "url(http://www.solofondosdepantalla.net/fondos-de-pantalla/Juegos/Fondo-de-pantalla-Retro-console.jpg)";
@@ -36,23 +51,30 @@ const Pres = () => {
     };
   }, []);
 
+
+  const small = useMediaQuery('(max-width: 600px)')
+
+
+
+
   const title = "MINI-JUEGOS"
 
   const classes = useStyles();
 
   return (
     <LayoutPres>
-      <Grid item xl={12} className={classes.h1}>
-        <Typography variant='h1'>{title}</Typography>
+      <Grid className={classes.h1} >
+        <Typography variant={small ? "h4" : 'h1'} style={small ? smallTitle : null}>{title}</Typography>
       </Grid>
       <Grid item xs={12} className={classes.fabes} >
         <Link to='/home'>
-          <Fab variant='extended' aria-label='delete' className={classes.fab}>
+          <Fab variant='extended' aria-label='delete' style={small ? smallBtn : null} className={classes.fab}>
             JUGAR...
         </Fab>
         </Link>
         <a href='https://www.google.com.ar'>
           <Fab
+            style={small ? smallBtn : null}
             variant='extended'
             aria-label='delete'
             // onClick={() => setMiEstado("PASAR")}

@@ -138,7 +138,7 @@ function Home(props) {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap>
-            MINI-JUEGOS
+            MINI-JUEGOS.
           </Typography>
         </Toolbar>
       </AppBar>

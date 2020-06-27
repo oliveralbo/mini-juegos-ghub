@@ -17,7 +17,10 @@ const palabras = [
   "virus",
   "guitarra",
   "argentina",
-  "archipielago"
+  "archipielago",
+  "ahorcado",
+  "abeja",
+  "internet"
 ];
  
 
